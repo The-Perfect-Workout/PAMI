@@ -82,7 +82,8 @@ abstract class Response extends IncomingMessage
      */
     public function isComplete()
     {
-        return $this->completed;
+        // Everything after the || is a hack to get the queue login to work correctly.
+        return $this->completed || (isset($this->keys['output']) && strpos($this->keys['output'],'Added interface') === 0);
     }
 
     /**
