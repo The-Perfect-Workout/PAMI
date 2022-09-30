@@ -531,7 +531,9 @@ class ClientImpl implements IClient
     public function close()
     {
         $this->logger->debug('Closing connection to asterisk.');
-        @stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
+        if (is_resource($this->socket)) {
+            @stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
+        }
     }
 
     /**
